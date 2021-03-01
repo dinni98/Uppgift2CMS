@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Core.PropertyEditors.ValueConverters
+@{
+Layout = "Main.cshtml";
+}
+
+@Html.Partial("Hero")
+@Html.Partial("Call to Action")
+
+
+@{
+	var latestNews = Umbraco.Content(Guid.Parse("b45d0abe-fac6-4723-9623-8e330e16a8a0"))
+    .ChildrenOfType("newsArticle")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate)
+    .Take(3);
+}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card-group">
+             @Html.Partial("Latest News")      
+            </div>
+         
+        </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+        @Umbraco.RenderMacro("GetLatestTweets", new {twitterHandle="elonmusk"})
+        </div>
+    </div>
+</div>
+

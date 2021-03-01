@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Core.PropertyEditors.ValueConverters
+
+@{
+	var latestNews = Umbraco.Content(Guid.Parse("b45d0abe-fac6-4723-9623-8e330e16a8a0"))
+    .ChildrenOfType("newsArticle")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate)
+    .Take(3);
+}
+           @foreach (var item in latestNews)   
+            {
+            
+            var imgCropper = item.Value<ImageCropperValue>("articleImage");
+            var thumbUrl = imgCropper.Src + imgCropper.GetCropUrl("Thumb");
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@thumbUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Value("leadIn")</p>
+                        <a href="@item.Url" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>               
+            }

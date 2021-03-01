@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uppgift2.Web", "Uppgift2\Uppgift2.Web.csproj", "{53153255-21E9-4700-A059-F0E9B2DA09CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uppgift2.Core", "Uppgift2.Core\Uppgift2.Core.csproj", "{F594F38F-F64F-4411-9807-8BEAED4D7EF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53153255-21E9-4700-A059-F0E9B2DA09CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53153255-21E9-4700-A059-F0E9B2DA09CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53153255-21E9-4700-A059-F0E9B2DA09CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53153255-21E9-4700-A059-F0E9B2DA09CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F594F38F-F64F-4411-9807-8BEAED4D7EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F594F38F-F64F-4411-9807-8BEAED4D7EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F594F38F-F64F-4411-9807-8BEAED4D7EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F594F38F-F64F-4411-9807-8BEAED4D7EF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33CB216B-FE35-472C-ADF3-8DF1D945D81F}
+	EndGlobalSection
+EndGlobal

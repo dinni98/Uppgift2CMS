@@ -1,0 +1,60 @@
+﻿@using System.Globalization
+@using Newtonsoft.Json
+@model Uppgift2.Core.ViewModel.TwitterViewModel
+@{
+    dynamic json = JsonConvert.DeserializeObject(Model.Json);
+}
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Latest Tweets for @Model.TwitterHandle</h2>
+            <div class="card-group">
+
+                @foreach (var itm in json)
+                {
+                    DateTime createdDate = DateTime.ParseExact(itm.created_at.ToString(), "ddd MMM dd HH:mm:ss +ffff yyyy", CultureInfo.InvariantCulture);
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div>
+                                <strong>Elon Musk</strong>
+                                @@@Model.TwitterHandle
+
+
+                                </div>
+                            <div>
+                                <i class="fab fa-twitter fa-2x"></i>
+
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            @itm.full_text
+
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <a href="http://twitter.com/@Model.TwitterHandle/status/@itm.id_str" class="stretched-link">Read More</a>
+                            
+                            @if (createdDate.Year == DateTime.Now.Year)
+                            {
+                                <text>
+                            @Html.Raw(createdDate.ToString("d MMM"))<br/>
+                                </text>
+                            }
+                            else
+                            {
+                                <text>
+                            @Html.Raw(createdDate.ToString("d MMM yyyy"))<br/>
+                                </text>
+                            }
+                        </div>
+                    </div>
+                }
+
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
