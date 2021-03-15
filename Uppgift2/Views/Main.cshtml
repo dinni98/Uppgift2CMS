@@ -31,10 +31,14 @@
         });
 
         Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js");
+        Html.RequiresJs("https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js");
+        Html.RequiresJs("https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js");
         Html.RequiresJs("/scripts/CookieConsent.js");
     }
 
     @Html.RenderCssHere()
+    
+    @RenderSection("head", false)
 </head>
 <body>
     

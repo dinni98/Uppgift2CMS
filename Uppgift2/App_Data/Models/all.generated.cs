@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "3d61fbc05a04707")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "dde1ed8a2377f3a9")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -484,6 +484,34 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
+		/// Email Settings Admin Accounts
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailSettingsAdminAccounts")]
+		public string EmailSettingsAdminAccounts => this.Value<string>("emailSettingsAdminAccounts");
+
+		///<summary>
+		/// Email Settings From Address
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailSettingsFromAddress")]
+		public string EmailSettingsFromAddress => this.Value<string>("emailSettingsFromAddress");
+
+		///<summary>
+		/// Recaptcha Secret Key
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("recaptchaSecretKey")]
+		public string RecaptchaSecretKey => this.Value<string>("recaptchaSecretKey");
+
+		///<summary>
+		/// Recaptcha Site Key
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("recaptchaSiteKey")]
+		public string RecaptchaSiteKey => this.Value<string>("recaptchaSiteKey");
+
+		///<summary>
 		/// Site Name
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
@@ -566,6 +594,13 @@ namespace Umbraco.Web.PublishedModels
 		public global::Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue ArticleImage => this.Value<global::Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue>("articleImage");
 
 		///<summary>
+		/// Article Related Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("articleRelatedContent")]
+		public global::System.Collections.Generic.IEnumerable<global::Umbraco.Core.Models.PublishedContent.IPublishedContent> ArticleRelatedContent => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Core.Models.PublishedContent.IPublishedContent>>("articleRelatedContent");
+
+		///<summary>
 		/// Author
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
@@ -596,7 +631,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>News Articles</summary>
 	[PublishedModel("newsArticles")]
-	public partial class NewsArticles : PublishedContentModel
+	public partial class NewsArticles : PublishedContentModel, IHero
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -618,11 +653,39 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// HeroContent
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroContent")]
+		public string HeroContent => global::Umbraco.Web.PublishedModels.Hero.GetHeroContent(this);
+
+		///<summary>
+		/// Hero Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroImage")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent HeroImage => global::Umbraco.Web.PublishedModels.Hero.GetHeroImage(this);
+
+		///<summary>
+		/// Hero Overlay Colour
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroOverlayColour")]
+		public string HeroOverlayColour => global::Umbraco.Web.PublishedModels.Hero.GetHeroOverlayColour(this);
+
+		///<summary>
+		/// HeroTitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroTitle")]
+		public string HeroTitle => global::Umbraco.Web.PublishedModels.Hero.GetHeroTitle(this);
 	}
 
 	/// <summary>Content Page</summary>
 	[PublishedModel("contentPage")]
-	public partial class ContentPage : PublishedContentModel, IHero, INavigation
+	public partial class ContentPage : PublishedContentModel, IHero, INavigation, IUsefulLinks
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -686,6 +749,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
 		[ImplementPropertyType("umbracoNaviHide")]
 		public bool UmbracoNaviHide => global::Umbraco.Web.PublishedModels.Navigation.GetUmbracoNaviHide(this);
+
+		///<summary>
+		/// Link Nested Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("linkNestedContent")]
+		public global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.PublishedModels.UsefulLink> LinkNestedContent => global::Umbraco.Web.PublishedModels.UsefulLinks.GetLinkNestedContent(this);
 	}
 
 	// Mixin Content Type with alias "navigation"
@@ -732,6 +802,459 @@ namespace Umbraco.Web.PublishedModels
 		/// <summary>Static getter for Umbraco Navi Hide</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
 		public static bool GetUmbracoNaviHide(INavigation that) => that.Value<bool>("umbracoNaviHide");
+	}
+
+	/// <summary>Register</summary>
+	[PublishedModel("register")]
+	public partial class Register : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "register";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Register, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Register(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+	}
+
+	/// <summary>Contact Form</summary>
+	[PublishedModel("contactForm")]
+	public partial class ContactForm : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "contactForm";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ContactForm, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ContactForm(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Contact Comments
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("contactComments")]
+		public string ContactComments => this.Value<string>("contactComments");
+
+		///<summary>
+		/// Contact Email
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("contactEmail")]
+		public string ContactEmail => this.Value<string>("contactEmail");
+
+		///<summary>
+		/// Contact Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("contactName")]
+		public string ContactName => this.Value<string>("contactName");
+
+		///<summary>
+		/// Contact Subject
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("contactSubject")]
+		public string ContactSubject => this.Value<string>("contactSubject");
+	}
+
+	/// <summary>Contact Forms</summary>
+	[PublishedModel("contactForms")]
+	public partial class ContactForms : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "contactForms";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ContactForms, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ContactForms(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+	}
+
+	/// <summary>Data</summary>
+	[PublishedModel("data")]
+	public partial class Data : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "data";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Data, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Data(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+	}
+
+	/// <summary>Useful Link</summary>
+	[PublishedModel("usefulLink")]
+	public partial class UsefulLink : PublishedElementModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "usefulLink";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<UsefulLink, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public UsefulLink(IPublishedElement content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Link Icon
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("linkIcon")]
+		public string LinkIcon => this.Value<string>("linkIcon");
+
+		///<summary>
+		/// Link Text
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("linkText")]
+		public string LinkText => this.Value<string>("linkText");
+
+		///<summary>
+		/// Link Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("linkUrl")]
+		public global::Umbraco.Web.Models.Link LinkUrl => this.Value<global::Umbraco.Web.Models.Link>("linkUrl");
+	}
+
+	// Mixin Content Type with alias "usefulLinks"
+	/// <summary>Useful Links</summary>
+	public partial interface IUsefulLinks : IPublishedContent
+	{
+		/// <summary>Link Nested Content</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.PublishedModels.UsefulLink> LinkNestedContent { get; }
+	}
+
+	/// <summary>Useful Links</summary>
+	[PublishedModel("usefulLinks")]
+	public partial class UsefulLinks : PublishedContentModel, IUsefulLinks
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "usefulLinks";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<UsefulLinks, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public UsefulLinks(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Link Nested Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("linkNestedContent")]
+		public global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.PublishedModels.UsefulLink> LinkNestedContent => GetLinkNestedContent(this);
+
+		/// <summary>Static getter for Link Nested Content</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.PublishedModels.UsefulLink> GetLinkNestedContent(IUsefulLinks that) => that.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.PublishedModels.UsefulLink>>("linkNestedContent");
+	}
+
+	/// <summary>Search</summary>
+	[PublishedModel("search")]
+	public partial class Search : PublishedContentModel, IHero
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "search";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Search, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Search(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// HeroContent
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroContent")]
+		public string HeroContent => global::Umbraco.Web.PublishedModels.Hero.GetHeroContent(this);
+
+		///<summary>
+		/// Hero Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroImage")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent HeroImage => global::Umbraco.Web.PublishedModels.Hero.GetHeroImage(this);
+
+		///<summary>
+		/// Hero Overlay Colour
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroOverlayColour")]
+		public string HeroOverlayColour => global::Umbraco.Web.PublishedModels.Hero.GetHeroOverlayColour(this);
+
+		///<summary>
+		/// HeroTitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("heroTitle")]
+		public string HeroTitle => global::Umbraco.Web.PublishedModels.Hero.GetHeroTitle(this);
+	}
+
+	/// <summary>Email Template</summary>
+	[PublishedModel("emailTemplate")]
+	public partial class EmailTemplate : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "emailTemplate";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<EmailTemplate, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public EmailTemplate(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Email Template Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailTemplateDescription")]
+		public string EmailTemplateDescription => this.Value<string>("emailTemplateDescription");
+
+		///<summary>
+		/// Email Template Html Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailTemplateHtmlContent")]
+		public global::System.Web.IHtmlString EmailTemplateHtmlContent => this.Value<global::System.Web.IHtmlString>("emailTemplateHtmlContent");
+
+		///<summary>
+		/// Email Template Subject Line
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailTemplateSubjectLine")]
+		public string EmailTemplateSubjectLine => this.Value<string>("emailTemplateSubjectLine");
+
+		///<summary>
+		/// Email Template Text Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailTemplateTextContent")]
+		public string EmailTemplateTextContent => this.Value<string>("emailTemplateTextContent");
+	}
+
+	/// <summary>Email Templates</summary>
+	[PublishedModel("emailTemplates")]
+	public partial class EmailTemplates : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "emailTemplates";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<EmailTemplates, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public EmailTemplates(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+	}
+
+	/// <summary>Email</summary>
+	[PublishedModel("email")]
+	public partial class Email : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "email";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Email, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Email(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Email Html Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailHtmlContent")]
+		public global::System.Web.IHtmlString EmailHtmlContent => this.Value<global::System.Web.IHtmlString>("emailHtmlContent");
+
+		///<summary>
+		/// Email Sent
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailSent")]
+		public bool EmailSent => this.Value<bool>("emailSent");
+
+		///<summary>
+		/// Email Sent Date
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailSentDate")]
+		public global::System.DateTime EmailSentDate => this.Value<global::System.DateTime>("emailSentDate");
+
+		///<summary>
+		/// Email Subject
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailSubject")]
+		public string EmailSubject => this.Value<string>("emailSubject");
+
+		///<summary>
+		/// Email Text Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailTextContent")]
+		public string EmailTextContent => this.Value<string>("emailTextContent");
+
+		///<summary>
+		/// Email To Address
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailToAddress")]
+		public string EmailToAddress => this.Value<string>("emailToAddress");
+	}
+
+	/// <summary>Emails</summary>
+	[PublishedModel("emails")]
+	public partial class Emails : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const string ModelTypeAlias = "emails";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Emails, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Emails(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
 	}
 
 	/// <summary>Folder</summary>

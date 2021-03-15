@@ -19,7 +19,9 @@ namespace Uppgift2.Core.ViewModel
         [Required]
         [MaxLength(255, ErrorMessage = "Please try and limit to 255 characters")]
         public string Comment { get; set; }
-        [MaxLength()]
+        [MaxLength(255, ErrorMessage = "Please try and limit to 255 characters.")]
         public string Subject { get; set; }
+
+        public string RecaptchaSiteKey { get; set; }
     }
 }

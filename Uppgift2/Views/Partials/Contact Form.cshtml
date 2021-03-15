@@ -1,36 +1,70 @@
 ﻿@model Uppgift2.Core.ViewModel.ContactFormViewModel
 @using Uppgift2.Core.Controllers
-@using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
-{
-    @Html.ValidationSummary()
-    @Html.AntiForgeryToken()
-
-    <div class="form-group">
-        <label for="your-name-textbox">Your name*</label>
-        <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
-        @Html.TextBoxFor(m => m.Name, new {@class="form-control form-control-lg", placeholder="Your Name", maxLength = "80"})
-    </div>
-
-
-    <div class="form-group">
-        <label for="your-email-textbox">Your email*</label>
-        <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-        @Html.TextBoxFor(m => m.EmailAddress, new {@class="form-control form-control-lg", placeholder="Your Email", maxLength = "255"})
-    </div>
-
-    <div class="form-group">
-        <label for="your-subject-textbox">Subject of inquiry</label>
-        <span class="field-validation-valid"></span>
-        @Html.TextBoxFor(m => m.Subject, new {@class="form-control form-control-lg", placeholder="Subject of inquiry", maxLength = "255"})
-    </div>
-
-    <div class="form-group">
-        <label for="your-comments-textbox">Your comments</label>
-        <span class="field-validation-valid"></span>
-        @Html.TextBoxFor(m => m.Comment, new {@class="form-control form-control-lg", placeholder="Your comments", maxLength = "500"})
-    </div>
-
-    <div class="form-group">
-        <button class="btn btn-outline btn-primary btn-lg type="submit>Send</button>
-    </div>
+@using System.Web.Mvc.Html
+@{
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
 }
+<script src="https://www.google.com/recaptcha/api.js?render=@Model.RecaptchaSiteKey"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('@Model.RecaptchaSiteKey',
+            { action: 'contact_us' })
+            .then(function (token) { $('#GoogleCaptchaToken').val(token) })
+    })
+</script>
+@if ((string) TempData["status"] == "OK")
+{
+    <text>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center p-5">
+                    <i class="far fa-5x fa-thumbs-up"></i>
+                    <div>
+                        Thanks for your input.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </text>
+}
+else
+{
+    @*Render the form*@
+    using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
+    {
+        @Html.ValidationSummary()
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label for="your-name-textbox">Your name*</label>
+            <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            @Html.TextBoxFor(m => m.Name, new {@class="form-control form-control-lg", placeholder="Your Name", maxLength = "80"})
+        </div>
+
+
+        <div class="form-group">
+            <label for="your-email-textbox">Your email*</label>
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            @Html.TextBoxFor(m => m.EmailAddress, new {@class="form-control form-control-lg", placeholder="Your Email", maxLength = "255"})
+        </div>
+
+        <div class="form-group">
+            <label for="your-subject-textbox">Subject of inquiry</label>
+            <span class="field-validation-valid"></span>
+            @Html.TextBoxFor(m => m.Subject, new {@class="form-control form-control-lg", placeholder="Subject of inquiry", maxLength = "255"})
+        </div>
+
+        <div class="form-group">
+            <label for="your-comments-textbox">Your comments</label>
+            <span class="field-validation-valid"></span>
+            @Html.TextBoxFor(m => m.Comment, new {@class="form-control form-control-lg", placeholder="Your comments", maxLength = "500"})
+        </div>
+
+        <input type="hidden" name="GoogleCaptchaToken" id="GoogleCaptchaToken"/>
+        <div class="form-group">
+            <button class="btn btn-outline btn-primary btn-lg type="submit>Send</button>
+        </div>
+    }
+}
+

@@ -1,40 +1,13 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
-
 @{
-    var heroImage = Model.Value<IPublishedContent>("heroImage")?.Url ?? "";
-    
-    var heroOverlayColour = Model.Value<string>("heroOverlayColour");
+	var heroImage = Model.Value<IPublishedContent>("heroImage")?.Url ?? "";
 }
-<style>
-    .home-hero {
-        background: no-repeat center center;
-        background-attachment: scroll;
-        position: relative;
-        background-size: cover;
-        color:white;
-    }
-    
-    .home-hero > .overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(31, 3, 103, 0.80);
-        z-index: 1;
-    }
-    
-    .home-hero > .inner {
-        position: relative;
-        z-index: 2;
-    }
-</style>
 <div class="jumbotron jumbotron-fluid home-hero" style="background-image:url('@heroImage')">
     <div class="overlay"></div>
     <div class="inner">
-  <div class="container">
-    <h1 class="display-4">@Model.Value("heroTitle")</h1>
-    <p class="lead">@Model.Value("heroContent")</p>
-  </div>
-  </div>
+      <div class="container">
+        <h1 class="display-4">@Model.Value("heroTitle")</h1>
+        <p class="lead">@Model.Value("heroSubtitle")</p>
+      </div>
+    </div>
 </div>
