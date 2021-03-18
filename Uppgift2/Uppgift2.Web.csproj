@@ -553,6 +553,8 @@
     <Content Include="Views\ContentPage.cshtml" />
     <Content Include="Views\MacroPartials\Call To Action.cshtml" />
     <Content Include="Views\MacroPartials\Contact Form.cshtml" />
+    <Content Include="Views\Register.cshtml" />
+    <Content Include="Views\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

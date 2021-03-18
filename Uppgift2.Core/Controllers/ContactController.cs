@@ -11,12 +11,20 @@ using Umbraco.Core.Logging;
 using System.Net.Mail;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using Uppgift2.Core.Interfaces;
 
 namespace Uppgift2.Core.Controllers
 {
 
     public class ContactController : SurfaceController
     {
+
+        private IEmailService _emailService;
+
+        public ContactController(IEmailService emailService)
+        {
+            _emailService = emailService;
+        }
         public ActionResult RenderContactForm()
         {
             var vm = new ContactFormViewModel();
@@ -67,8 +75,7 @@ namespace Uppgift2.Core.Controllers
                     newContact.SetValue("contactComments", vm.Comment);
                     Services.ContentService.SaveAndPublish(newContact);
                 }
-
-                SendContactFormReceivedEmail(vm);
+                _emailService.SendContactNotificationToAdmin(vm);
 
                 TempData["status"] = "OK";
 

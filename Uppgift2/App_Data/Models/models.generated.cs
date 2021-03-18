@@ -17,8 +17,8 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "dde1ed8a2377f3a9")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6845ed70dc18424e")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedModels
 {
@@ -482,6 +482,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
 		[ImplementPropertyType("emailSettingsFromAddress")]
 		public string EmailSettingsFromAddress => this.Value<string>("emailSettingsFromAddress");
+
+		///<summary>
+		/// Email Test Accounts
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.11.1")]
+		[ImplementPropertyType("emailTestAccounts")]
+		public string EmailTestAccounts => this.Value<string>("emailTestAccounts");
 
 		///<summary>
 		/// Recaptcha Secret Key
