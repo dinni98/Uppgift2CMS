@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Services;
@@ -41,14 +42,9 @@ namespace Uppgift2.Core.Services
             var htmlContent = emailTemplate.Value<string>("emailTemplateHtmlContent");
             var textContent = emailTemplate.Value<string>("emailTemplateTextContent");
 
-
-            htmlContent = htmlContent.Replace("##name##", vm.Name);
-            htmlContent = htmlContent.Replace("##email##", vm.EmailAddress);
-            htmlContent = htmlContent.Replace("##comment##", vm.Comment);
-
-            textContent = textContent.Replace("##name##", vm.Name);
-            textContent = textContent.Replace("##email##", vm.EmailAddress);
-            textContent = textContent.Replace("##comment##", vm.Comment);
+            MailMerge("name", vm.Name, ref htmlContent, ref textContent);
+            MailMerge("email", vm.EmailAddress, ref htmlContent, ref textContent);
+            MailMerge("comment", vm.Comment, ref htmlContent, ref textContent);
 
             var siteSettings = _umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
@@ -56,19 +52,30 @@ namespace Uppgift2.Core.Services
                 throw new Exception("There are no site settings");
             }
 
-            var fromAddress = siteSettings.Value<string>("emailSettingsFromAddress");
             var toAddresses = siteSettings.Value<string>("emailSettingsAdminAccounts");
 
-            if (string.IsNullOrEmpty(fromAddress))
-            {
-                throw new Exception("There needs to be a from address in site settings.");
-            }
 
             if (string.IsNullOrEmpty(toAddresses))
             {
                 throw new Exception("There needs to be a to address in site settings");
             }
 
+            SendMail(toAddresses, subject, htmlContent, textContent);
+        }
+
+        private void SendMail(string toAddresses, string subject, string htmlContent, string textContent)
+        {
+            var siteSettings = _umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
+            if (siteSettings == null)
+            {
+                throw new Exception("There are no site settings");
+            }
+
+            var fromAddress = siteSettings.Value<string>("emailSettingsFromAddress");
+            if (string.IsNullOrEmpty(fromAddress))
+            {
+                throw new Exception("There needs to be a from address in site settings.");
+            }
             var debugMode = siteSettings.Value<bool>("testMode");
             var testEmailAccounts = siteSettings.Value<string>("emailTestAccounts");
 
@@ -121,11 +128,39 @@ namespace Uppgift2.Core.Services
                 }
                 catch (Exception exc)
                 {
-                    _logger.Error<EmailService>("There was a problem sending the email" ,exc);
+                    _logger.Error<EmailService>("There was a problem sending the email", exc);
                     // ReSharper disable once PossibleIntendedRethrow
                     throw exc;
                 }
             }
+        }
+
+        public void SendVerifyEmailAddressNotification(string membersEmail, string verificationToken)
+        {
+            var emailTemplate = GetEmailTemplate("Verify Email");
+
+            if (emailTemplate == null)
+            {
+                throw new Exception("Template not found");
+            }
+
+            var subject = emailTemplate.Value<string>("emailTemplateSubjectLine");
+            var htmlContent = emailTemplate.Value<string>("emailTemplateHtmlContent");
+            var textContent = emailTemplate.Value<string>("emailTemplateTextContent");
+
+
+            var url = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, string.Empty);
+            url += $"/verify?token={verificationToken}";
+            MailMerge("verify-url", url, ref htmlContent, ref textContent);
+
+            SendMail(membersEmail, subject, htmlContent, textContent);
+
+        }
+
+        private void MailMerge(string token, string value, ref string htmlContent, ref string textContent)
+        {
+            htmlContent = htmlContent.Replace($"##{token}##", value);
+            textContent = textContent.Replace($"##{token}##", value);
         }
 
         private IPublishedContent GetEmailTemplate(string templateName)
@@ -134,6 +169,43 @@ namespace Uppgift2.Core.Services
                 .DescendantsOrSelfOfType("emailTemplate").FirstOrDefault(w => w.Name == templateName);
 
             return template;
+        }
+
+        public void SendResetPasswordNotification(string membersEmail, string resetToken)
+        {
+            var emailTemplate = GetEmailTemplate("Reset Password");
+
+            if (emailTemplate == null)
+            {
+                throw new Exception("Template not found");
+            }
+
+            var subject = emailTemplate.Value<string>("emailTemplateSubjectLine");
+            var htmlContent = emailTemplate.Value<string>("emailTemplateHtmlContent");
+            var textContent = emailTemplate.Value<string>("emailTemplateTextContent");
+
+            var url = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, string.Empty);
+            url += $"/reset-password?token={resetToken}";
+
+            MailMerge("reset-url", url, ref htmlContent, ref textContent);
+
+            SendMail(membersEmail, subject, htmlContent, textContent);
+        }
+
+        public void SendPasswordChangedNotification(string membersEmail)
+        {
+            var emailTemplate = GetEmailTemplate("Password Changed");
+
+            if (emailTemplate == null)
+            {
+                throw new Exception("Template not found");
+            }
+
+            var subject = emailTemplate.Value<string>("emailTemplateSubjectLine");
+            var htmlContent = emailTemplate.Value<string>("emailTemplateHtmlContent");
+            var textContent = emailTemplate.Value<string>("emailTemplateTextContent");
+
+            SendMail(membersEmail, subject, htmlContent, textContent);
         }
     }
 }
